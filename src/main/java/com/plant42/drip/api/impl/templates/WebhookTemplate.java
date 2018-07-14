@@ -3,6 +3,7 @@ package com.plant42.drip.api.impl.templates;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
 import com.plant42.drip.api.callbacks.NonDeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.WebhookOperations;
 import com.plant42.drip.api.impl.services.WebhookService;
 import com.plant42.drip.domain.Webhook;
@@ -29,6 +30,7 @@ public class WebhookTemplate extends AbstractTemplate implements WebhookOperatio
         try {
             WebhookService service = retrofit.create(WebhookService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.WEBHOOKS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -43,6 +45,7 @@ public class WebhookTemplate extends AbstractTemplate implements WebhookOperatio
         try {
             WebhookService service = retrofit.create(WebhookService.class);
             Call<ResponseBody> call = service.fetch(Credentials.basic(this.token,""), accountId, webhookId );
+            callback.setRoute(Route.WEBHOOKS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -70,6 +73,7 @@ public class WebhookTemplate extends AbstractTemplate implements WebhookOperatio
         try {
             WebhookService service = retrofit.create(WebhookService.class);
             Call<ResponseBody> call = service.create(Credentials.basic(this.token,""), accountId,  payload );
+            callback.setRoute(Route.WEBHOOKS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -85,6 +89,7 @@ public class WebhookTemplate extends AbstractTemplate implements WebhookOperatio
         try {
             WebhookService service = retrofit.create(WebhookService.class);
             Call<ResponseBody> call = service.delete(Credentials.basic(this.token,""), accountId, webhookId );
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {

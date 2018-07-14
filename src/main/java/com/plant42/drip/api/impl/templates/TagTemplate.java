@@ -3,6 +3,7 @@ package com.plant42.drip.api.impl.templates;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
 import com.plant42.drip.api.callbacks.NonDeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.TagOperations;
 import com.plant42.drip.api.impl.services.TagService;
 import okhttp3.Credentials;
@@ -28,6 +29,7 @@ public class TagTemplate extends AbstractTemplate implements TagOperations {
         try {
             TagService service = retrofit.create(TagService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.TAGS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -54,6 +56,7 @@ public class TagTemplate extends AbstractTemplate implements TagOperations {
         try {
             TagService service = retrofit.create(TagService.class);
             Call<ResponseBody> call = service.addTagToSubcriber(Credentials.basic(this.token,""), accountId, payload);
+            callback.setRoute(Route.TAGS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -72,6 +75,7 @@ public class TagTemplate extends AbstractTemplate implements TagOperations {
         try {
             TagService service = retrofit.create(TagService.class);
             Call<ResponseBody> call = service.removeTagFromSubcriber(Credentials.basic(this.token,""), accountId, email, tag);
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {

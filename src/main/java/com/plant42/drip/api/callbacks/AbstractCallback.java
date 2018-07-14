@@ -26,6 +26,13 @@ public abstract class AbstractCallback {
     public abstract void onSuccess();
     public abstract void onFailure();
 
+    public AbstractCallback() {
+        initObjectMapper();
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 
     protected void initObjectMapper() {
         this.objectMapper  = new com.fasterxml.jackson.databind.ObjectMapper();

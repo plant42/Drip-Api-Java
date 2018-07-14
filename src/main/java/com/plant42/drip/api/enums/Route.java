@@ -16,6 +16,7 @@ public enum Route {
     WEBHOOKS("webhooks", false, Webhook[].class, new TypeReference<List<Webhook>>() {}),
     TRIGGERS("triggers", false, Trigger[].class, new TypeReference<List<Trigger>>() {}),
     DELETE(null, false, null, null),
+    NONE(null, false, null, null),
     SUBSCRIBERS("subscribers", false, Subscriber[].class, new TypeReference<List<Subscriber>>() {}),
     USER("users", false, User[].class, new TypeReference<List<User>>() {}),
     CUSTOM_FIELDS("custom_field_identifiers", false, String[].class, new TypeReference<List<String>>() {}),

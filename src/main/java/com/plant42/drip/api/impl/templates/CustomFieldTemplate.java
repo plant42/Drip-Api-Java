@@ -2,6 +2,7 @@ package com.plant42.drip.api.impl.templates;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.CustomFieldOperations;
 import com.plant42.drip.api.impl.services.CustomFieldService;
 import okhttp3.Credentials;
@@ -24,6 +25,7 @@ public class CustomFieldTemplate extends AbstractTemplate implements CustomField
         try {
             CustomFieldService service = retrofit.create(CustomFieldService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.CUSTOM_FIELDS);
             call.enqueue(callback);
 
         } catch (Exception e) {

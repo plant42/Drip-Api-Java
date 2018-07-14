@@ -2,6 +2,7 @@ package com.plant42.drip.api.impl.templates;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.UserOperations;
 import com.plant42.drip.api.impl.services.UserService;
 import com.plant42.drip.domain.User;
@@ -25,6 +26,7 @@ public class UserTemplate extends AbstractTemplate implements UserOperations {
         try {
             UserService service = retrofit.create(UserService.class);
             Call<ResponseBody> call = service.user(Credentials.basic(this.token,""));
+            callback.setRoute(Route.USER);
             call.enqueue(callback);
 
         } catch (Exception e) {

@@ -3,6 +3,7 @@ package com.plant42.drip.api.impl.templates;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
 import com.plant42.drip.api.callbacks.NonDeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.CampaignOperations;
 import com.plant42.drip.api.impl.services.CampaignService;
 import com.plant42.drip.domain.Campaign;
@@ -27,6 +28,7 @@ public class CampaignTemplate extends AbstractTemplate implements CampaignOperat
         try {
             CampaignService service = retrofit.create(CampaignService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.CAMPAIGNS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -41,6 +43,7 @@ public class CampaignTemplate extends AbstractTemplate implements CampaignOperat
         try {
             CampaignService service = retrofit.create(CampaignService.class);
             Call<ResponseBody> call = service.fetch(Credentials.basic(this.token,""), accountId, campaignId );
+            callback.setRoute(Route.CAMPAIGNS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -56,6 +59,7 @@ public class CampaignTemplate extends AbstractTemplate implements CampaignOperat
         try {
             CampaignService service = retrofit.create(CampaignService.class);
             Call<ResponseBody> call = service.subscribers(Credentials.basic(this.token,""), accountId, campaignId );
+            callback.setRoute(Route.CAMPAIGN_SUBSCRIBERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -71,6 +75,7 @@ public class CampaignTemplate extends AbstractTemplate implements CampaignOperat
         try {
             CampaignService service = retrofit.create(CampaignService.class);
             Call<ResponseBody> call = service.subscriberCampaigns(Credentials.basic(this.token,""), accountId, subscriberId );
+            callback.setRoute(Route.CAMPAIGNS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -87,6 +92,7 @@ public class CampaignTemplate extends AbstractTemplate implements CampaignOperat
         try {
             CampaignService service = retrofit.create(CampaignService.class);
             Call<ResponseBody> call = service.activate(Credentials.basic(this.token,""), accountId, campaignId );
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -102,6 +108,7 @@ public class CampaignTemplate extends AbstractTemplate implements CampaignOperat
         try {
             CampaignService service = retrofit.create(CampaignService.class);
             Call<ResponseBody> call = service.pause(Credentials.basic(this.token,""), accountId, campaignId );
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {

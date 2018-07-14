@@ -28,9 +28,9 @@ public abstract class DeserializingCallback<S> extends AbstractCallback implemen
     protected S object;
     protected Map<String,String> links;
 
-    public DeserializingCallback(Route route) {
-        this.initObjectMapper();
-        this.route = route;
+    public DeserializingCallback() {
+        super();
+
     }
 
 

@@ -3,6 +3,7 @@ package com.plant42.drip.api.impl.templates;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
 import com.plant42.drip.api.callbacks.NonDeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.SubscriberOperations;
 import com.plant42.drip.api.impl.services.SubscriberService;
 import com.plant42.drip.domain.Subscriber;
@@ -29,6 +30,7 @@ public class SubscriberTemplate extends AbstractTemplate implements SubscriberOp
         try {
             SubscriberService service = retrofit.create(SubscriberService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.SUBSCRIBERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -43,6 +45,7 @@ public class SubscriberTemplate extends AbstractTemplate implements SubscriberOp
         try {
             SubscriberService service = retrofit.create(SubscriberService.class);
             Call<ResponseBody> call = service.fetch(Credentials.basic(this.token,""), accountId, subscriberId );
+            callback.setRoute(Route.SUBSCRIBERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -64,6 +67,7 @@ public class SubscriberTemplate extends AbstractTemplate implements SubscriberOp
         try {
             SubscriberService service = retrofit.create(SubscriberService.class);
             Call<ResponseBody> call = service.create(Credentials.basic(this.token,""), accountId, payload);
+            callback.setRoute(Route.SUBSCRIBERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -78,6 +82,7 @@ public class SubscriberTemplate extends AbstractTemplate implements SubscriberOp
         try {
             SubscriberService service = retrofit.create(SubscriberService.class);
             Call<ResponseBody> call = service.unsubscribeFromCampaign(Credentials.basic(this.token,""), accountId, subscriberId, campaignId );
+            callback.setRoute(Route.SUBSCRIBERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -92,6 +97,7 @@ public class SubscriberTemplate extends AbstractTemplate implements SubscriberOp
         try {
             SubscriberService service = retrofit.create(SubscriberService.class);
             Call<ResponseBody> call = service.unsubscribeFromAll(Credentials.basic(this.token,""), accountId, subscriberId );
+            callback.setRoute(Route.SUBSCRIBERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -105,6 +111,7 @@ public class SubscriberTemplate extends AbstractTemplate implements SubscriberOp
         try {
             SubscriberService service = retrofit.create(SubscriberService.class);
             Call<ResponseBody> call = service.delete(Credentials.basic(this.token,""), accountId, subscriberId );
+            callback.setRoute(Route.DELETE);
             call.enqueue(callback);
 
         } catch (Exception e) {

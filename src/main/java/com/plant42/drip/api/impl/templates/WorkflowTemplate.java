@@ -3,6 +3,7 @@ package com.plant42.drip.api.impl.templates;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
 import com.plant42.drip.api.callbacks.NonDeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.WorkflowOperations;
 import com.plant42.drip.api.impl.services.WorkflowService;
 import com.plant42.drip.domain.Trigger;
@@ -27,6 +28,7 @@ public class WorkflowTemplate extends AbstractTemplate implements WorkflowOperat
         try {
             WorkflowService service = retrofit.create(WorkflowService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.WORKFLOWS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -41,6 +43,7 @@ public class WorkflowTemplate extends AbstractTemplate implements WorkflowOperat
         try {
             WorkflowService service = retrofit.create(WorkflowService.class);
             Call<ResponseBody> call = service.fetch(Credentials.basic(this.token,""), accountId, workflowId );
+            callback.setRoute(Route.WORKFLOWS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -56,6 +59,7 @@ public class WorkflowTemplate extends AbstractTemplate implements WorkflowOperat
         try {
             WorkflowService service = retrofit.create(WorkflowService.class);
             Call<ResponseBody> call = service.triggers(Credentials.basic(this.token,""), accountId, workflowId );
+            callback.setRoute(Route.TRIGGERS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -71,6 +75,7 @@ public class WorkflowTemplate extends AbstractTemplate implements WorkflowOperat
         try {
             WorkflowService service = retrofit.create(WorkflowService.class);
             Call<ResponseBody> call = service.activate(Credentials.basic(this.token,""), accountId, workflowId );
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -86,6 +91,7 @@ public class WorkflowTemplate extends AbstractTemplate implements WorkflowOperat
         try {
             WorkflowService service = retrofit.create(WorkflowService.class);
             Call<ResponseBody> call = service.pause(Credentials.basic(this.token,""), accountId, workflowId );
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {

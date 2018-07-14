@@ -2,6 +2,7 @@ package com.plant42.drip.api.impl.templates;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.BroadcastOperations;
 import com.plant42.drip.api.impl.services.BroadcastService;
 import com.plant42.drip.domain.Broadcast;
@@ -25,6 +26,7 @@ public class BroadcastTemplate extends AbstractTemplate implements BroadcastOper
         try {
             BroadcastService service = retrofit.create(BroadcastService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.BROADCASTS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -39,6 +41,7 @@ public class BroadcastTemplate extends AbstractTemplate implements BroadcastOper
         try {
             BroadcastService service = retrofit.create(BroadcastService.class);
             Call<ResponseBody> call = service.fetch(Credentials.basic(this.token,""), accountId, broadcastId );
+            callback.setRoute(Route.BROADCASTS);
             call.enqueue(callback);
 
         } catch (Exception e) {

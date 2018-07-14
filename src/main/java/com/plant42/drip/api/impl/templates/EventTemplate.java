@@ -3,6 +3,7 @@ package com.plant42.drip.api.impl.templates;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
 import com.plant42.drip.api.callbacks.NonDeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.EventOperations;
 import com.plant42.drip.api.impl.services.EventService;
 import okhttp3.Credentials;
@@ -28,6 +29,7 @@ public class EventTemplate extends AbstractTemplate implements EventOperations {
         try {
             EventService service = retrofit.create(EventService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""), accountId);
+            callback.setRoute(Route.EVENT_ACTIONS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -49,6 +51,7 @@ public class EventTemplate extends AbstractTemplate implements EventOperations {
         try {
             EventService service = retrofit.create(EventService.class);
             Call<ResponseBody> call = service.create(Credentials.basic(this.token,""), accountId, payload);
+            callback.setRoute(Route.NONE);
             call.enqueue(callback);
 
         } catch (Exception e) {

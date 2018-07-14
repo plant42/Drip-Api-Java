@@ -11,9 +11,8 @@ import java.io.IOException;
 
 public abstract class NonDeserializingCallback extends AbstractCallback implements Callback<ResponseBody>, okhttp3.Callback {
 
-    public NonDeserializingCallback(Route route) {
-        this.initObjectMapper();
-        this.route = route;
+    public NonDeserializingCallback() {
+        super();
     }
 
 

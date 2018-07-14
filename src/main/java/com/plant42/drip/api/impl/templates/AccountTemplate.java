@@ -2,6 +2,7 @@ package com.plant42.drip.api.impl.templates;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.plant42.drip.api.callbacks.DeserializingCallback;
+import com.plant42.drip.api.enums.Route;
 import com.plant42.drip.api.impl.operations.AccountOperations;
 import com.plant42.drip.api.impl.services.AccountService;
 import com.plant42.drip.domain.Account;
@@ -25,6 +26,7 @@ public class AccountTemplate extends AbstractTemplate implements AccountOperatio
         try {
             AccountService service = retrofit.create(AccountService.class);
             Call<ResponseBody> call = service.list(Credentials.basic(this.token,""));
+            callback.setRoute(Route.ACCOUNTS);
             call.enqueue(callback);
 
         } catch (Exception e) {
@@ -39,6 +41,7 @@ public class AccountTemplate extends AbstractTemplate implements AccountOperatio
         try {
             AccountService service = retrofit.create(AccountService.class);
             Call<ResponseBody> call = service.fetch(Credentials.basic(this.token,""), id );
+            callback.setRoute(Route.ACCOUNTS);
             call.enqueue(callback);
 
         } catch (Exception e) {
